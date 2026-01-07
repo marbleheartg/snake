@@ -1,0 +1,33 @@
+{
+  "name": "mini-app-template",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "1": "---",
+    "fork:base": "clear && bunx hardhat node --fork https://mainnet.base.org",
+    "2": "---",
+    "test:local": "clear && bun run clean && bun run compile && bun run deploy:local && bun wagmi generate && bunx hardhat test --network localhost",
+    "deploy:local": "clear && bunx hardhat ignition deploy ./ignition/modules/ProxyModule.ts --network localhost --reset",
+    "3": "---",
+    "deploy:base": "clear && bun run clean && bun run compile && clear && bunx hardhat ignition deploy ./ignition/modules/ProxyModule.ts --network base && bun wagmi generate",
+    "upgrade:base": "clear && bun run clean && bun run compile && clear && bunx hardhat ignition deploy ./ignition/modules/UpgradeModule.ts --network base && bun wagmi generate",
+    "4": "---",
+    "clean": "clear && bunx hardhat clean",
+    "compile": "clear && bunx hardhat compile",
+    "tunnel": "clear && ngrok http 8545"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-ignition": "^3.0.6",
+    "@nomicfoundation/hardhat-toolbox-viem": "^5.0.1",
+    "@openzeppelin/contracts": "^5.4.0",
+    "@openzeppelin/contracts-upgradeable": "^5.4.0",
+    "@types/node": "^22.19.3",
+    "@wagmi/cli": "^2.8.0",
+    "forge-std": "github:foundry-rs/forge-std#v1.9.4",
+    "hardhat": "^3.1.2",
+    "hardhat-reown": "^0.0.7",
+    "typescript": "~5.9.3",
+    "viem": "^2.43.5"
+  }
+}
