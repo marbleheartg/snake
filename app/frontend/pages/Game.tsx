@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import { useConnection } from "wagmi"
 
-export default function Promote() {
+export default function Game() {
   const { address: userAddress } = useConnection()
 
   return (
@@ -13,7 +13,7 @@ export default function Promote() {
           "bg-white/10 glass text-(--accent) rounded-4xl",
         )}
       >
-        <h1>Promote</h1>
+        <h1>Snake Game</h1>
       </div>
       {/* {process.env.NODE_ENV === "development" && (
         <pre className={clsx("fixed bottom-0 inset-x-0 p-5 pb-15 rounded-t-4xl", "text-xs text-wrap bg-amber-200/50 pointer-events-none z-50")}>

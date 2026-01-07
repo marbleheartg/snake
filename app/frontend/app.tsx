@@ -8,11 +8,10 @@ import { BrowserRouter, Route, Routes } from "react-router"
 import Background from "./components/Background"
 import Header from "./components/Header"
 import Menu from "./components/Menu"
-import Claim from "./pages/Claim"
+import Game from "./pages/Game"
 import Home from "./pages/Home"
-import Promote from "./pages/Promote"
 
-const pngImgSrcs: string[] = []
+const pngImgSrcs: string[] = ["og/icon"]
 const svgImgSrcs: string[] = []
 
 export default function App() {
@@ -45,8 +44,7 @@ export default function App() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/" element={<Claim />} />
-            <Route path="/promote" element={<Promote />} />
+            <Route path="/" element={<Game />} />
             <Route path="/home" element={<Home />} />
           </Routes>
           <Menu />
