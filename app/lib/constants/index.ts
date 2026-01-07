@@ -5,7 +5,7 @@ const MINIAPP = {
   description: "snake game",
   tags: ["snake", "snake", "snake", "snake", "snake"],
   primaryCategory: "games",
-  webhookUrl: "https://api.neynar.com/f/app/3448f775-80b4-490f-95c8-171217b878f6/event",
+  webhookUrl: "https://api.neynar.com/f/app/1e90deaf-0d8f-47ba-bf8d-95d68c9a9f74/event",
   bgColor: "#334f3c",
 }
 

@@ -6,6 +6,11 @@ if (!NEXT_PUBLIC_HOST) throw new Error("ManifestCredentialsNotConfigured")
 
 export async function GET() {
   return NextResponse.json({
+    accountAssociation: {
+      header: "eyJmaWQiOjEwMjEyMTQsInR5cGUiOiJhdXRoIiwia2V5IjoiMHgzMTU3NDk3YjgyZUM5MUEyMzRmMTFFZTQ0NTUzRDJhMzAzZThkNTllIn0",
+      payload: "eyJkb21haW4iOiJzbmFrZS5tYXJibGVoZWFydC54eXoifQ",
+      signature: "ZV5GyYYgXO8wpVRui9SGkybR/Faf8jFj/WbcU/q5+E8K+At0LmSEXCiwQxI/MtHr1gsO0DLCtZPSm6bEw3fcvRw=",
+    },
     miniapp: {
       version: "1",
       name: MINIAPP.title,

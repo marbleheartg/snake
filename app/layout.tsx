@@ -27,6 +27,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="256x256" href="/images/og/icon.png" />
         <meta name="fc:miniapp" content={JSON.stringify(MINIAPP_METADATA)} />
         <meta name="description" content={MINIAPP.description} />
+        <meta name="base:app_id" content="695eb7ca646908900bbdad57" />
         <title>{MINIAPP.title}</title>
       </head>
       <body className={`${mainFont.variable} ${titleFont.variable} antialiased`}>{children}</body>
