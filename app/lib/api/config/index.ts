@@ -1,9 +1,9 @@
 import { store } from "@/lib/store"
 import axios from "axios"
 
-const axiosInstance = axios.create()
+const axiosAuth = axios.create()
 
-axiosInstance.interceptors.request.use(config => {
+axiosAuth.interceptors.request.use(config => {
   const session = store.getState().session
 
   if (session) config.headers.Authorization = `Bearer ${session}`
@@ -11,4 +11,4 @@ axiosInstance.interceptors.request.use(config => {
   return config
 })
 
-export default axiosInstance
+export default axiosAuth

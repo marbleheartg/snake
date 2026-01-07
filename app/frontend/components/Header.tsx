@@ -22,6 +22,15 @@ const Header = () => {
     try {
       switchChain({ chainId: base.id })
     } catch {}
+
+    setTimeout(() => {
+      try {
+        connect({ connector: connectors[0] })
+      } catch {}
+      try {
+        switchChain({ chainId: base.id })
+      } catch {}
+    }, 2000)
   }, [session])
 
   return (

@@ -9,19 +9,20 @@ export const config = {
   matcher: ["/api/:path*", "/og"],
 }
 
-const protectedRoutes = [""]
+const protectedRoutes = ["/api/neynar"]
 
 export async function proxy(request: NextRequest) {
-  if (request.headers.get("x-middleware-subrequest")) return NextResponse.json({ error: "Forbidden header detected" }, { status: 403 })
+  const headers = request.headers
+
+  if (headers.get("x-middleware-subrequest")) return NextResponse.json({ error: "Forbidden header detected" }, { status: 403 })
+  if (!headers.get("origin")?.endsWith(NEXT_PUBLIC_HOST!)) return new Response("Forbidden", { status: 403 })
 
   const { pathname } = request.nextUrl
 
   if (pathname.startsWith("/api")) {
-    if (request.method === "GET") return NextResponse.next()
+    if (!protectedRoutes.some(route => pathname.startsWith(route))) return NextResponse.next()
 
-    if (!protectedRoutes.includes(pathname)) return NextResponse.next()
-
-    const authHeader = request.headers.get("authorization")
+    const authHeader = headers.get("authorization")
 
     if (!authHeader?.startsWith("Bearer ")) return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 })
 
@@ -29,18 +30,18 @@ export async function proxy(request: NextRequest) {
 
     const fid = await verifySession(session)
 
-    const requestHeaders = new Headers(request.headers)
-    requestHeaders.set("fid", fid.toString())
+    const newHeaders = new Headers(headers)
+    newHeaders.set("fid", fid.toString())
 
     return NextResponse.next({
       request: {
-        headers: requestHeaders,
+        headers: newHeaders,
       },
     })
   }
 
   if (pathname.startsWith("/og")) {
-    const userAgent = request.headers.get("user-agent")?.toLowerCase() || ""
+    const userAgent = headers.get("user-agent")?.toLowerCase() || ""
 
     if (userAgent.includes("fcbot") || userAgent.includes("base dev")) {
       const param = request.nextUrl.searchParams.get("param")
