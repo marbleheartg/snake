@@ -25,6 +25,32 @@ const Menu = () => {
     },
 
     {
+      to: "/leaderboard",
+      icon: (
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M16 4h.01" />
+          <path d="M16 20h.01" />
+          <path d="M8 4h.01" />
+          <path d="M8 20h.01" />
+          <path d="M12 4h.01" />
+          <path d="M12 20h.01" />
+          <path d="M2 8h20" />
+          <path d="M2 12h20" />
+          <path d="M2 16h20" />
+        </svg>
+      ),
+    },
+
+    {
       to: "/home",
       icon: (
         <svg
@@ -45,7 +71,7 @@ const Menu = () => {
   ]
 
   return (
-    <nav className={clsx("fixed bottom-10 left-1/2 -translate-x-1/2", "flex justify-around gap-1", "p-1 rounded-full bg-white/5", "glass")}>
+    <nav className={clsx("fixed bottom-8 left-1/2 -translate-x-1/2", "flex justify-around gap-1", "p-1 rounded-full bg-white/5", "glass")}>
       {menuItems.map(item => (
         <NavLink
           key={item.to}

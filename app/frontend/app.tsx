@@ -6,10 +6,10 @@ import sdk from "@farcaster/miniapp-sdk"
 import { useEffect } from "react"
 import { BrowserRouter, Route, Routes } from "react-router"
 import Background from "./components/Background"
-import Header from "./components/Header"
 import Menu from "./components/Menu"
 import Game from "./pages/Game"
 import Home from "./pages/Home"
+import Leaderboard from "./pages/Leaderboard"
 
 const pngImgSrcs: string[] = ["og/icon"]
 const svgImgSrcs: string[] = []
@@ -42,9 +42,10 @@ export default function App() {
     <div onDragStart={e => e.preventDefault()}>
       <Providers>
         <BrowserRouter>
-          <Header />
+          {/* <Header /> */}
           <Routes>
             <Route path="/" element={<Game />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/home" element={<Home />} />
           </Routes>
           <Menu />
