@@ -1,0 +1,6 @@
+{
+  "ProxyModule#Contract": "0xAeF66BEa66e6CcFEb7a6a735C1c27614AD54Ce24",
+  "ProxyModule#TransparentUpgradeableProxy": "0x0B44FAf4dcDafECb1a34a6Fc30eB9B787c9149ef",
+  "ProxyModule#ProxyAdmin": "0xC5446F664a3171A84c3fb892fC87eF8905eC0B80",
+  "ContractModule#Contract": "0x0B44FAf4dcDafECb1a34a6Fc30eB9B787c9149ef"
+}

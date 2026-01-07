@@ -7,6 +7,7 @@ const proxyModule = buildModule("ProxyModule", (m) => {
 
   const initData = m.encodeFunctionCall(contract, "initialize", [
     proxyAdminOwner,
+    0,
   ]);
 
   const proxy = m.contract("TransparentUpgradeableProxy", [
