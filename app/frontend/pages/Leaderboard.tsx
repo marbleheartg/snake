@@ -10,26 +10,11 @@ export default function Leaderboard() {
   const formattedLeaderboard = useMemo(() => {
     if (!leaderboard) return []
 
-    // Filter out zero addresses, deduplicate by player (keep highest score), and sort
-    const filtered = leaderboard.filter(entry => entry.player !== "0x0000000000000000000000000000000000000000")
-
-    // Deduplicate by player address, keeping the highest score for each player
-    const deduplicated = filtered.reduce(
-      (acc, entry) => {
-        const existingIndex = acc.findIndex(e => e.player.toLowerCase() === entry.player.toLowerCase())
-        if (existingIndex === -1) {
-          // New player, add them
-          acc.push(entry)
-        } else if (Number(entry.score) > Number(acc[existingIndex].score)) {
-          // Higher score, replace existing entry
-          acc[existingIndex] = entry
-        }
-        return acc
-      },
-      [] as typeof filtered,
-    )
-
-    return deduplicated.sort((a, b) => Number(b.score) - Number(a.score))
+    // Filter out zero addresses, zero scores, and invalid entries
+    const zeroAddress = "0x0000000000000000000000000000000000000000"
+    return leaderboard
+      .filter(entry => entry && entry.player && entry.player.toLowerCase() !== zeroAddress.toLowerCase() && Number(entry.score) > 0)
+      .sort((a, b) => Number(b.score) - Number(a.score))
   }, [leaderboard])
 
   const getRankIcon = (rank: number) => {
@@ -62,7 +47,7 @@ export default function Leaderboard() {
     <main className="fixed inset-0 overflow-hidden">
       <div
         className={clsx(
-          "fixed inset-0 pb-2",
+          "fixed inset-0",
           "flex flex-col",
           "bg-gradient-to-br from-white/12 via-white/8 to-white/5",
           "glass overflow-hidden",
@@ -95,7 +80,7 @@ export default function Leaderboard() {
         </div>
 
         {/* Leaderboard content */}
-        <div className="flex-1 overflow-hidden px-4 py-6">
+        <div className="flex-1 overflow-hidden px-2 pt-6">
           {isLoading ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
@@ -112,7 +97,7 @@ export default function Leaderboard() {
               </div>
             </div>
           ) : (
-            <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+            <div className="h-full overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
               <div className="space-y-3">
                 {formattedLeaderboard.map((entry, i) => {
                   const rank = i + 1
@@ -120,10 +105,10 @@ export default function Leaderboard() {
 
                   return (
                     <div
-                      key={i}
+                      key={`${entry.player}-${entry.score}-${i}`}
                       className={clsx(
                         "relative rounded-2xl border backdrop-blur-sm transition-all duration-300",
-                        "bg-gradient-to-r from-white/8 to-white/5",
+                        " from-white/8 to-white/5",
                         "border-white/15",
                         "shadow-[0_4px_16px_rgba(0,0,0,0.2)]",
                         isTopThree && "shadow-[0_8px_32px_rgba(0,0,0,0.3)]",
@@ -173,13 +158,6 @@ export default function Leaderboard() {
             </div>
           )}
         </div>
-
-        {/* Footer hint */}
-        {!isLoading && formattedLeaderboard.length > 0 && (
-          <div className="px-6 pb-25 text-center">
-            <p className="text-xs text-white/50 uppercase tracking-[0.2em] font-medium">play to claim your spot on the leaderboard</p>
-          </div>
-        )}
       </div>
     </main>
   )
