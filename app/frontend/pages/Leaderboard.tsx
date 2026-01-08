@@ -49,14 +49,14 @@ export default function Leaderboard() {
         className={clsx(
           "fixed inset-0",
           "flex flex-col",
-          "bg-gradient-to-br from-white/12 via-white/8 to-white/5",
+          "bg-linear-to-br from-white/12 via-white/8 to-white/5",
           "glass overflow-hidden",
           "backdrop-blur-3xl",
           "animate-in fade-in duration-700",
         )}
       >
         {/* Header */}
-        <div className="flex justify-center items-center w-full px-6 py-8 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent">
+        <div className="flex justify-center items-center w-full px-6 py-8 border-b border-white/10 bg-linear-to-b from-white/5 to-transparent">
           <div className="flex flex-col items-center">
             <h1 className="text-2xl font-black uppercase tracking-[0.2em] text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)] mb-2">
               leaderboard
@@ -64,14 +64,14 @@ export default function Leaderboard() {
             <div className="flex items-center gap-4">
               <div className="text-center">
                 <span className="text-[10px] opacity-70 uppercase tracking-[0.15em] font-semibold block mb-1">global record</span>
-                <span className="text-xl font-black tabular-nums bg-gradient-to-br from-emerald-400 to-emerald-300 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(16,185,129,0.3)]">
+                <span className="text-xl font-black tabular-nums bg-linear-to-br from-emerald-400 to-emerald-300 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(16,185,129,0.3)]">
                   {globalBestScore?.toString() || "0"}
                 </span>
               </div>
-              <div className="h-8 w-px bg-gradient-to-b from-transparent via-white/40 to-transparent"></div>
+              <div className="h-8 w-px bg-linear-to-b from-transparent via-white/40 to-transparent"></div>
               <div className="text-center">
                 <span className="text-[10px] opacity-70 uppercase tracking-[0.15em] font-semibold block mb-1">total players</span>
-                <span className="text-xl font-black tabular-nums bg-gradient-to-br from-blue-400 to-blue-300 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(59,130,246,0.3)]">
+                <span className="text-xl font-black tabular-nums bg-linear-to-br from-blue-400 to-blue-300 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(59,130,246,0.3)]">
                   {formattedLeaderboard.length}
                 </span>
               </div>
@@ -120,7 +120,7 @@ export default function Leaderboard() {
                         <div className="flex items-center gap-4">
                           <div className="flex items-center gap-3">
                             <span className={clsx("text-lg font-black tabular-nums", getRankColor(rank))}>{getRankIcon(rank)}</span>
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/10 border border-white/20 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-full bg-linear-to-br from-white/20 to-white/10 border border-white/20 flex items-center justify-center">
                               <span className="text-xs font-bold text-white/80">{entry.player.slice(2, 4).toUpperCase()}</span>
                             </div>
                           </div>
@@ -128,7 +128,7 @@ export default function Leaderboard() {
                             <div className="font-mono text-sm text-white/90 font-medium mb-0.5">
                               {entry.player.slice(0, 8)}...{entry.player.slice(-6)}
                             </div>
-                            {isTopThree && <div className="text-xs text-white/60 uppercase tracking-[0.1em] font-semibold">top {rank} player</div>}
+                            {isTopThree && <div className="text-xs text-white/60 uppercase tracking-widest font-semibold">top {rank} player</div>}
                           </div>
                         </div>
 
@@ -145,9 +145,9 @@ export default function Leaderboard() {
                         <div
                           className={clsx(
                             "absolute inset-0 rounded-2xl border-2 pointer-events-none",
-                            rank === 1 && "border-yellow-400/30 bg-gradient-to-r from-yellow-500/5 to-transparent",
-                            rank === 2 && "border-gray-300/30 bg-gradient-to-r from-gray-300/5 to-transparent",
-                            rank === 3 && "border-orange-400/30 bg-gradient-to-r from-orange-500/5 to-transparent",
+                            rank === 1 && "border-yellow-400/30 bg-linear-to-r from-yellow-500/5 to-transparent",
+                            rank === 2 && "border-gray-300/30 bg-linear-to-r from-gray-300/5 to-transparent",
+                            rank === 3 && "border-orange-400/30 bg-linear-to-r from-orange-500/5 to-transparent",
                           )}
                         />
                       )}
