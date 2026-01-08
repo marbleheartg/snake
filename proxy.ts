@@ -12,20 +12,19 @@ export const config = {
 const protectedRoutes = ["/api/neynar"]
 
 export async function proxy(request: NextRequest) {
-  const headers = request.headers
+  const { headers } = request
 
   if (headers.get("x-middleware-subrequest")) return NextResponse.json({ error: "Forbidden header detected" }, { status: 403 })
-  if (!headers.get("origin")?.endsWith(NEXT_PUBLIC_HOST!)) return new Response("Forbidden", { status: 403 })
 
   const { pathname } = request.nextUrl
 
   if (pathname.startsWith("/api")) {
     if (!protectedRoutes.some(route => pathname.startsWith(route))) return NextResponse.next()
 
+    if (!headers.get("origin")?.endsWith(NEXT_PUBLIC_HOST!)) return new Response("Forbidden", { status: 403 })
+
     const authHeader = headers.get("authorization")
-
     if (!authHeader?.startsWith("Bearer ")) return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 })
-
     const session = authHeader.split(" ")[1]
 
     const fid = await verifySession(session)
@@ -33,11 +32,7 @@ export async function proxy(request: NextRequest) {
     const newHeaders = new Headers(headers)
     newHeaders.set("fid", fid.toString())
 
-    return NextResponse.next({
-      request: {
-        headers: newHeaders,
-      },
-    })
+    return NextResponse.next({ request: { headers: newHeaders } })
   }
 
   if (pathname.startsWith("/og")) {
